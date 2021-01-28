@@ -12,7 +12,7 @@ window.Vue = require('vue');
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import router from './router'
-import store from './Store/index'
+import store from './store/index'
 Vue.use(Vuetify);
 /**
  * The following block of code may be used to automatically register your
