@@ -5,6 +5,8 @@ import VueRouter from 'vue-router'
 import Register from './auth/Register.vue'
 import Login from './auth/Login.vue'
 import userPage from './userPage/userPage.vue'
+import userProfileEdit from './userPage/userProfileEdit.vue'
+import catRegister from './userPage/catRegister.vue'
 
 // ルータをインストール
 Vue.use(VueRouter)
@@ -25,6 +27,16 @@ const routes = [
     path: '/userPage', 
     component:userPage,
     name: 'userPage', 
+  },
+  {
+    path:'/userProfileEdit',
+    component:userProfileEdit,
+    name:'userProfileEdit'
+  },
+  {
+    path:'/catRegister',
+    component:catRegister,
+    name:'catRegister',
   }
 ]
 

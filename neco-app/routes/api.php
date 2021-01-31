@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
         return response()->json(['user' => $request->user()]);
     });
     Route::post('logout', 'Auth\Api\LoginController@logout')->name('api.logout');
+    Route::put('/user/update','UserController@update')->name('user.update');
 });
 
 Route::post('register', 'Auth\Api\RegisterController@register')->name('api.register');
