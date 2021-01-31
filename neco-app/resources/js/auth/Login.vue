@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h1>Login</h1>
     <v-container>
       <v-form class="login-form" @submit.prevent="register">
+        <h1>Login</h1>
         <v-text-field v-model="loginForm.email" type="email" label="email" outlined></v-text-field>
         <v-text-field
           v-model="loginForm.password"
@@ -26,7 +26,7 @@ export default {
   }),
   methods: {
     login() {
-      this.$store.dispatch('auth/login', this.loginForm).then(() => {
+      this.$store.dispatch('auth/login', this.loginForm).then( () => {
         this.$router.push({ name: 'userPage' });
       });
     },
@@ -35,9 +35,8 @@ export default {
 </script>
 
 <style scoped>
-.login-form{
-    max-width:500px;
-    margin:0 auto;
-  }
-
+.login-form {
+  max-width: 500px;
+  margin: 0 auto;
+}
 </style>

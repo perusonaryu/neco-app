@@ -17,9 +17,9 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/{any}', function () {
-    return view('welcome');
+    return view('main');
 })->where('any', '.*');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

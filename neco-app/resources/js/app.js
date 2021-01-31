@@ -13,7 +13,10 @@ import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 import router from './router'
 import store from './store/index'
+import prefectureData from './prefectureData.json'
 Vue.use(Vuetify);
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -38,4 +41,5 @@ const app = new Vue({
     vuetify: new Vuetify(),
     router,
     store,
+    prefectureData,
 });

@@ -17,6 +17,7 @@ const mutations = {
     },
     setToken(state, token) {
         window.localStorage.setItem('token', token);
+        state.token = token;
     }
 }
 
@@ -40,16 +41,19 @@ const actions = {
     },
 
     logout(context) {
-        console.log(state.token)
-        axios.post('/api/logout', null, {
+        axios.post('/api/logout', null,{
             headers: {
                 Authorization: `Bearer ${state.token}`,
             }
-        }).then((result) => {
+        })
+        .then((result) => {
+            console.log(result.data);
             context.commit("setUser", null);
             context.commit("setToken", null);
+            
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
+            
         });
     },
 
@@ -63,6 +67,18 @@ const actions = {
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
         });
+    },
+
+    userUpdate(context,data){
+        axios.put('/api/user/update',data ,{
+            headers: {
+                Authorization: `Bearer ${state.token}`,
+            }
+        }).then((result) => {
+            context.commit('setUser',result.data.user);
+        }).catch(error => {
+            console.log(error);
+        })
     }
 }
 
