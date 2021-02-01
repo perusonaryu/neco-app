@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
 // ページコンポーネントをインポートする
 import Register from './auth/Register.vue'
 import Login from './auth/Login.vue'
@@ -10,6 +11,7 @@ import catRegister from './userPage/catRegister.vue'
 
 // ルータをインストール
 Vue.use(VueRouter)
+
 
 // パスとコンポーネントのマッピング
 const routes = [
@@ -45,6 +47,9 @@ const router = new VueRouter({
     mode: 'history',
     routes
 })
+
+
+
 
 // VueRouterインスタンスをエクスポートする
 // app.jsでインポートするため

@@ -30,7 +30,8 @@ export default {
   mounted() {
     this.prefectures = prefectureData;
     const token = this.$store.getters['auth/token'];
-    //認証されているかチェック
+
+    //トークンがあるかチェックなければログイン画面へ
     if (!token) {
       this.$router.push({ name: 'userLogin' });
     }

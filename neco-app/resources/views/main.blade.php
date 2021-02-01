@@ -5,10 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>NECO APP</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
@@ -24,20 +20,33 @@
                     Navigation
                     <ul style="display:flex; list-style:none;">
                         <li>
-                            <router-link to="/userRegister">
+                            <router-link 
+                            exact
+                            :to="{name:'userRegister'}"
+                            >
                                 Register
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/userLogin">
+                            <router-link 
+                            :to="{name:'userLogin'}"
+                            >
                                 Login
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/userPage">マイページ</router-link>
+                            <router-link 
+                            :to="{name:'userPage'}"
+                            >
+                                マイページ
+                            </router-link>
                         </li>
                         <li>
-                            <router-link to="/catRegister">猫登録</router-link>
+                            <router-link 
+                            :to="{name:'catRegister'}"
+                            >
+                                猫登録
+                            </router-link>
                         </li>
                     </ul>
                 </div>

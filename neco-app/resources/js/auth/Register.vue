@@ -55,9 +55,7 @@ export default {
   },
   methods: {
     register() {
-      this.$store.dispatch('auth/register', this.registerForm).then(() => {
-        this.$router.push({ name: 'userPage' });
-      });
+      this.$store.dispatch('auth/register', this.registerForm);
     },
   },
   mounted() {
