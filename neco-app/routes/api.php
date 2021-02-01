@@ -25,10 +25,16 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     });
     Route::post('logout', 'Auth\Api\LoginController@logout')->name('api.logout');
     Route::put('/user/update','UserController@update')->name('user.update');
+
+    //猫情報登録
+    Route::post('cat/register','CatController@register');
+    Route::get('cat/mydata/{id}','CatController@catslistget');
 });
 
 Route::post('register', 'Auth\Api\RegisterController@register')->name('api.register');
 Route::post('login', 'Auth\Api\LoginController@login')->name('api.login');
+
+
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

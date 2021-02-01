@@ -26,9 +26,7 @@ export default {
   }),
   methods: {
     login() {
-      this.$store.dispatch('auth/login', this.loginForm).then( () => {
-        this.$router.push({ name: 'userPage' });
-      });
+      this.$store.dispatch('auth/login', this.loginForm);
     },
   },
 };

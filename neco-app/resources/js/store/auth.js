@@ -1,3 +1,4 @@
+import router from '../router'
 
 const state =  {
     user: null,
@@ -26,6 +27,7 @@ const actions = {
         axios.post('/api/register', data).then((result) => {
             context.commit("setUser", result.data.user);
             context.commit("setToken", result.data.token);
+            router.push({ name: 'userPage' });
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
         });
@@ -35,8 +37,10 @@ const actions = {
         axios.post('/api/login', data).then((result) => {
             context.commit("setUser", result.data.user);
             context.commit("setToken", result.data.token);
+            router.push({ name: 'userPage' });
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
+            router.push({ name: 'userLogin' });
         });
     },
 
@@ -66,6 +70,7 @@ const actions = {
             context.commit("setUser", result.data.user);
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
+            router.push({ name: 'userLogin' });
         });
     },
 

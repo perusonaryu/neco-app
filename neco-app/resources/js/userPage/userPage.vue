@@ -4,16 +4,21 @@
     <p>地域 {{ user.region }}</p>
     <router-link to="/userProfileEdit">プロフィール編集</router-link>
     <v-btn @click="logout">Logout</v-btn>
+
+    <div class="mycat-list">
+      <my-cats-list :userId="userData.id" />
+    </div>
   </v-container>
 </template>
 
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    userData: '',
+  }),
   computed: {
-
     user() {
-      return this.$store.getters['auth/user'];
+      return (this.userData = this.$store.getters['auth/user']);
     },
   },
 
@@ -26,15 +31,10 @@ export default {
   },
 
   mounted() {
-
     const token = this.$store.getters['auth/token'];
-    //認証されているかチェック
-    if(!token){
-        this.$router.push({ name: 'userLogin' });
-    }
-    const user = this.$store.getters['auth/user'];
+    this.userData = this.$store.getters['auth/user'];
 
-    if (token && !user && token != 'null') {
+    if (token && !this.user && token != 'null') {
       this.$store.dispatch('auth/fetchUser');
     }
   },
