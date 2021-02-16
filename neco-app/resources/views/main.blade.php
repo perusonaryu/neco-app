@@ -3,13 +3,17 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <title>NECO APP</title>
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
             ul li{
                 margin:0 10px;
+            }
+
+            a{
+                text-decoration:none;
             }
         </style>
     </head>
@@ -46,6 +50,13 @@
                             :to="{name:'catRegister'}"
                             >
                                 猫登録
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link 
+                            :to="{name:'chatList'}"
+                            >
+                                チャットリスト
                             </router-link>
                         </li>
                     </ul>

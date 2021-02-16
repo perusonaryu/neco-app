@@ -4,6 +4,7 @@
     <v-text-field v-model="form.name" type="text" label="お名前" outlined></v-text-field>
     <v-text-field v-model="form.age" type="text" label="年齢" outlined></v-text-field>
     <v-text-field v-model="form.personality" type="text" label="性格" outlined></v-text-field>
+    <v-text-field v-model="form.gender" type="text" label="性別" outlined></v-text-field>
     <v-file-input
       multiple
       label="猫画像"
@@ -29,6 +30,7 @@ export default {
       name: '',
       age: '',
       personality: '',
+      gender:'',
       image: '',
       userId: '',
     },
@@ -44,9 +46,14 @@ export default {
   },
   mounted() {
     const token = this.$store.getters['auth/token'];
-    this.userData = this.$store.getters['auth/user'];
+    const user = this.$store.getters['auth/user'];
+    if(user){
+      this.userData = this.$store.getters['auth/user'];
+      this.form.userId = this.userData.id;
+    }
     if (token && !this.userData && token != 'null') {
       this.$store.dispatch('auth/fetchUser');
+      
     }
   },
 
@@ -57,6 +64,7 @@ export default {
         formData.append('age',this.form.age);
         formData.append('personality',this.form.personality);
         formData.append('image',this.form.image);
+        formData.append('gender',this.form.gender);
         formData.append('userId',this.form.userId);
 
       this.$store.dispatch('cat/register', formData);

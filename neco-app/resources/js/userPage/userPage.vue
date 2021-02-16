@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <h2>こんにちは {{ user.name }}さん</h2>
-    <p>地域 {{ user.region }}</p>
+    <h2>こんにちは {{ userData.name }}さん</h2>
+    <p>地域 {{ userData.region }}</p>
     <router-link to="/userProfileEdit">プロフィール編集</router-link>
     <v-btn @click="logout">Logout</v-btn>
 
@@ -14,11 +14,11 @@
 <script>
 export default {
   data: () => ({
-    userData: '',
+    userId:''
   }),
   computed: {
-    user() {
-      return (this.userData = this.$store.getters['auth/user']);
+    userData() {
+      return  this.$store.getters['auth/user'];
     },
   },
 
@@ -31,12 +31,13 @@ export default {
   },
 
   mounted() {
-    const token = this.$store.getters['auth/token'];
-    this.userData = this.$store.getters['auth/user'];
-
-    if (token && !this.user && token != 'null') {
-      this.$store.dispatch('auth/fetchUser');
-    }
+    this.$store.dispatch('auth/fetchUser');
+    this.$store.subscribe( mutations => {
+      if (mutations.type === 'auth/setUser') {
+        const token = this.$store.getters['auth/token'];
+        this.userId = this.userData.id;
+      }
+    });
   },
 };
 </script>

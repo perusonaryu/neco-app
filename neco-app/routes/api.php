@@ -14,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
 
 
+Broadcast::routes(['middleware' => ['auth:sanctum']]);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return response()->json(['user' => $request->user()]);
@@ -29,13 +27,32 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //猫情報登録
     Route::post('cat/register','CatController@register');
     Route::get('cat/mydata/{id}','CatController@catslistget');
+    Route::get('cat/edit/{id}','CatController@edit');
+    Route::put('cat/update','CatController@update');
 });
 
 Route::post('register', 'Auth\Api\RegisterController@register')->name('api.register');
 Route::post('login', 'Auth\Api\LoginController@login')->name('api.login');
 
+//猫掲載者の情報を取得
+Route::get('posted/user/detail/{id}','UserController@detail');
 
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::get('cats/data','CatController@get');
+Route::get('cat/detail/{id}','CatController@detail');
+
+
+
+//お気に入り
+Route::post('cats/like/check','LikeController@check');
+Route::post('cat/like','LikeController@like');
+Route::post('cat/unlike','LikeController@unlike');
+
+
+//メッセージ機能
+Route::get('messagelist/{id}' ,'MessageRoomController@index');
+Route::get('messages/{user_id_1}/{user_id_2}', 'MessageController@fetchMessages');
+Route::post('send', 'MessageController@sendMessage');
+
+
+

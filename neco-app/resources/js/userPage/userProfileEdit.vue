@@ -36,6 +36,7 @@ export default {
       this.$router.push({ name: 'userLogin' });
     }
 
+
     const user = this.$store.getters['auth/user'];
     if (token && !this.userData && token != 'null') {
       this.$store.dispatch('auth/fetchUser');

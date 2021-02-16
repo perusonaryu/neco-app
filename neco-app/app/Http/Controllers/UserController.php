@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use Illuminate\Support\Facades\Validator;
 
+
 class UserController extends Controller
 {
     public function update(Request $request){
@@ -25,6 +26,11 @@ class UserController extends Controller
         return json_encode(['user' => $user]);
     }
 
+    public function detail($id){
+        $posted_user = User::find($id,['name','region','introduction']);
+
+        return json_encode(['postedUser' => $posted_user]);
+    }
 
     protected function validator(array $data)
     {
