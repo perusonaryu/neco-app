@@ -31,6 +31,9 @@ Vue.use(Vuetify);
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('my-cats-list', require('./components/myPageComponent/myCatsList.vue').default);
+Vue.component('all-cat-list', require('./components/everyonePageComponent/allCatList.vue').default);
+Vue.component('like-check', require('./components/everyonePageComponent/likeCheck.vue').default);
+Vue.component('chat-list', require('./components/everyonePageComponent/chatListComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

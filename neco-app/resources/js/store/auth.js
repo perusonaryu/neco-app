@@ -2,7 +2,8 @@ import router from '../router'
 
 const state =  {
     user: null,
-    token: window.localStorage.getItem('token')
+    token: window.sessionStorage.getItem('token'),
+
 }
 
 
@@ -16,10 +17,14 @@ const mutations = {
     setUser(state, user) {
         state.user = user;
     },
+    resetUser(state){
+        state.user = null;
+    },
     setToken(state, token) {
-        window.localStorage.setItem('token', token);
+        window.sessionStorage.setItem('token', token);
         state.token = token;
-    }
+    },
+    
 }
 
 const actions = {
@@ -37,7 +42,7 @@ const actions = {
         axios.post('/api/login', data).then((result) => {
             context.commit("setUser", result.data.user);
             context.commit("setToken", result.data.token);
-            router.push({ name: 'userPage' });
+            router.push({ name: 'topPage' });
         }).catch(error => {
             console.log(`Error! HTTP Status: ${error}`);
             router.push({ name: 'userLogin' });
@@ -52,7 +57,7 @@ const actions = {
         })
         .then((result) => {
             console.log(result.data);
-            context.commit("setUser", null);
+            context.commit("resetUser", null);
             context.commit("setToken", null);
             
         }).catch(error => {
@@ -84,7 +89,8 @@ const actions = {
         }).catch(error => {
             console.log(error);
         })
-    }
+    },
+    
 }
 
 
