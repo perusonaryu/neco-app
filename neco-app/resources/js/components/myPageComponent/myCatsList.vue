@@ -26,6 +26,10 @@
               編集
             </v-btn>
           </router-link>
+          <v-spacer></v-spacer>
+          <v-btn outlined rounded text color="red" @click="catDelete(catData.id)">
+            削除
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-col>
@@ -57,7 +61,20 @@ export default {
   },
   mounted() {},
 
-  methods: {},
+  methods: {
+    catDelete(catId) {
+      const token = this.$store.getters['auth/token'];
+      axios
+        .delete('api/cat/delete/' + catId, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+        .then(result => {
+          this.$store.dispatch('cat/myCatsListGet', { userId: this.user.id, token: token });
+        });
+    },
+  },
 };
 </script>
 

@@ -8,60 +8,27 @@
         <!-- Styles -->
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <style>
-            ul li{
-                margin:0 10px;
+            *{
+                color:#333333;
             }
 
+
             a{
-                text-decoration:none;
+                text-decoration:none!important;
             }
+
+            [v-cloak] {
+                display: none;
+            }
+
+
         </style>
     </head>
     <body>
         <div id="app">
             <v-app>
-                <div>
-                    Navigation
-                    <ul style="display:flex; list-style:none;">
-                        <li>
-                            <router-link 
-                            exact
-                            :to="{name:'userRegister'}"
-                            >
-                                Register
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link 
-                            :to="{name:'userLogin'}"
-                            >
-                                Login
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link 
-                            :to="{name:'userPage'}"
-                            >
-                                マイページ
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link 
-                            :to="{name:'catRegister'}"
-                            >
-                                猫登録
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link 
-                            :to="{name:'chatList'}"
-                            >
-                                チャットリスト
-                            </router-link>
-                        </li>
-                    </ul>
-                </div>
-                <div>
+                <header-component> </header-component>
+                <div class="content">
                     <router-view />
                 </div>
 

@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('cat/mydata/{id}','CatController@catslistget');
     Route::get('cat/edit/{id}','CatController@edit');
     Route::put('cat/update','CatController@update');
+    Route::delete('cat/delete/{cat_id}','CatController@delete');
 });
 
 Route::post('register', 'Auth\Api\RegisterController@register')->name('api.register');
@@ -53,6 +54,11 @@ Route::post('cat/unlike','LikeController@unlike');
 Route::get('messagelist/{id}' ,'MessageRoomController@index');
 Route::get('messages/{user_id_1}/{user_id_2}', 'MessageController@fetchMessages');
 Route::post('send', 'MessageController@sendMessage');
+Route::get('latestmessage/{user_id_1}/{user_id_2}','MessageController@latestMessageGet');
+
+
+//検索機能
+Route::get('search','CatController@search');
 
 
 

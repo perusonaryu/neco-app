@@ -15,6 +15,7 @@ import topPage from './everyonePage/top.vue'
 import catDetail from './everyonePage/catDetail.vue'
 import chat from './everyonePage/chat.vue'
 import chatList from './everyonePage/chatList.vue'
+import catSearched from './everyonePage/catSearched.vue'
 
 
 
@@ -92,6 +93,13 @@ const routes = [
     path:'/chat:chatUserId',
     component:chat,
     name:'chat',
+  },
+
+  //猫検索結果画面
+  {
+    path:'/catSearched',
+    component:catSearched,
+    name:'catSearched',
   }
 ]
 

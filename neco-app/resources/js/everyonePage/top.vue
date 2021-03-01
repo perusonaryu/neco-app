@@ -2,6 +2,22 @@
   <div>
     <div class="top-image">
       <img src="/storage/cat-top-image.jpg" alt="" />
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="地域で検索"
+          aria-label="Search"
+          v-model="searchWord"
+        />
+        <router-link
+          :to="{
+            name: 'catSearched',
+          }"
+        >
+          <v-btn>猫を探す</v-btn>
+        </router-link>
+      </form>
     </div>
 
     <v-container>
@@ -12,7 +28,9 @@
 
 <script>
 export default {
-  data: () => ({}),
+  data: () => ({
+    searchWord: '',
+  }),
   computed: {
     userData() {
       return this.$store.getters['auth/user'];
@@ -22,17 +40,11 @@ export default {
     const token = this.$store.getters['auth/token'];
     if (token && token != 'null') {
       this.$store.dispatch('auth/fetchUser');
-      // this.$store.subscribe(mutations => {
-      //   if (mutations.type === 'auth/setUser') {
-      //     this.userData = this.$store.getters['auth/user'];
-      //   }
-      // });
     }
   },
-  // watch: {
-  //   userData: function(userData, undefind) {
-  //   },
-  // },
+  methods: {
+    
+  },
 };
 </script>
 
@@ -40,14 +52,22 @@ export default {
 .top-image {
   width: 100%;
   height: 500px;
+  position: relative;
 }
 
 .top-image img {
-  background-image: url('/storage/cat-top-image.jpg');
   background-size: cover;
-  background-position: center;
+  object-fit: cover;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+}
+
+.top-image form {
+  position: absolute;
+  top: 50%;
+  left: 25%;
+  width: 50%;
 }
 </style>
+
+<style></style>
