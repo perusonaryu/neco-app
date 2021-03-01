@@ -12,4 +12,9 @@ class Cat extends Model
     ];
 
     protected $table = 'cats';
+
+    //belongsTo設定
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
 }

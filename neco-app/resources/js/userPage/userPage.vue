@@ -1,9 +1,8 @@
 <template>
-  <v-container>
+  <v-container class="mypage" v-if="userData">
     <h2>こんにちは {{ userData.name }}さん</h2>
     <p>地域 {{ userData.region }}</p>
     <router-link to="/userProfileEdit">プロフィール編集</router-link>
-    <v-btn @click="logout">Logout</v-btn>
 
     <div class="mycat-list">
       <my-cats-list :userId="userData.id" />
@@ -14,25 +13,21 @@
 <script>
 export default {
   data: () => ({
-    userId:''
+    userId: '',
   }),
   computed: {
     userData() {
-      return  this.$store.getters['auth/user'];
+      return this.$store.getters['auth/user'];
     },
   },
 
   methods: {
-    logout() {
-      this.$store.dispatch('auth/logout').then(() => {
-        this.$router.push({ name: 'userLogin' });
-      });
-    },
   },
+
 
   mounted() {
     this.$store.dispatch('auth/fetchUser');
-    this.$store.subscribe( mutations => {
+    this.$store.subscribe(mutations => {
       if (mutations.type === 'auth/setUser') {
         const token = this.$store.getters['auth/token'];
         this.userId = this.userData.id;
@@ -42,4 +37,10 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+
+.mypage{
+  margin-top: 100px;
+}
+
+</style>

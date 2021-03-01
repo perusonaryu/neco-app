@@ -13,18 +13,31 @@ class MessageController extends Controller
 {
     public function fetchMessages($user_id_1, $user_id_2)
     {
-        //メッセージルームがあるか確認
+        //お互いのメッセージを取得
         $message = Message::where(function ($message) use ($user_id_1, $user_id_2) {
             $message->where('send_user', $user_id_1)
                 ->where('receive_user', $user_id_2);
         })->orWhere(function ($message) use ($user_id_1, $user_id_2) {
             $message->where('send_user', $user_id_2)
                 ->where('receive_user', $user_id_1);
-        })->get(['message','send_user']);
-        
+        })->get(['message','send_user','created_at']);
+
         return json_encode(['message' => $message]);
     }
 
+    public function latestMessageGet($user_id_1,$user_id_2){
+        //お互いの最新のメッセージだけを取得
+        $message = Message::where(function ($message) use ($user_id_1, $user_id_2) {
+            $message->where('send_user', $user_id_1)
+                ->where('receive_user', $user_id_2);
+        })->orWhere(function ($message) use ($user_id_1, $user_id_2) {
+            $message->where('send_user', $user_id_2)
+                ->where('receive_user', $user_id_1);
+        })->orderBy('created_at', 'desc')->first(['message','send_user','created_at']);
+
+        return json_encode(['ratestMessage' => $message]);
+        
+    }
     public function sendMessage(Request $request)
     {
         $message = Validator::make($request->all(), [

@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="cat-register" v-if="user">
     <h2 class="text-center mb-5">猫を登録</h2>
     <v-text-field v-model="form.name" type="text" label="お名前" outlined></v-text-field>
     <v-text-field v-model="form.age" type="text" label="年齢" outlined></v-text-field>
@@ -30,7 +30,7 @@ export default {
       name: '',
       age: '',
       personality: '',
-      gender:'',
+      gender: '',
       image: '',
       userId: '',
     },
@@ -39,39 +39,38 @@ export default {
   }),
   computed: {
     user() {
-      return (
-        (this.userData = this.$store.getters['auth/user']), (this.form.userId = this.userData.id)
-      );
+      return this.$store.getters['auth/user'];
+    },
+  },
+  watch: {
+    user: function(user, undefind) {
+      this.form.userId = user.id;
     },
   },
   mounted() {
     const token = this.$store.getters['auth/token'];
-    const user = this.$store.getters['auth/user'];
-    if(user){
-      this.userData = this.$store.getters['auth/user'];
-      this.form.userId = this.userData.id;
-    }
-    if (token && !this.userData && token != 'null') {
+    if (token && token != 'null') {
       this.$store.dispatch('auth/fetchUser');
-      
+    } else {
+      this.$router.push({ name: 'userLogin' });
     }
   },
 
   methods: {
     catRegister() {
-        let formData = new FormData();
-        formData.append('name',this.form.name);
-        formData.append('age',this.form.age);
-        formData.append('personality',this.form.personality);
-        formData.append('image',this.form.image);
-        formData.append('gender',this.form.gender);
-        formData.append('userId',this.form.userId);
+      let formData = new FormData();
+      formData.append('name', this.form.name);
+      formData.append('age', this.form.age);
+      formData.append('personality', this.form.personality);
+      formData.append('image', this.form.image);
+      formData.append('gender', this.form.gender);
+      formData.append('userId', this.form.userId);
 
       this.$store.dispatch('cat/register', formData);
     },
     confirmImage(e) {
       this.form.image = e[0];
-        this.createImage(this.form.image);
+      this.createImage(this.form.image);
     },
 
     createImage(image) {
@@ -86,10 +85,14 @@ export default {
 </script>
 
 <style scoped>
-.img{
-    width:500px;
-    height:300px;
-    background-size: cover;
-    background-position: center;
+.cat-register {
+  margin-top: 100px;
+}
+
+.img {
+  width: 500px;
+  height: 300px;
+  background-size: cover;
+  background-position: center;
 }
 </style>

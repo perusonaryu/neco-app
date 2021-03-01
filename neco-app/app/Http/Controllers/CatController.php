@@ -77,6 +77,24 @@ class CatController extends Controller
     }
 
 
+    //県名での検索
+    public function search(Request $request){
+        $searched_cats_data = Cat::select('cats.*')->join('users','cats.user_id', '=','users.id')->where('region','like', '%'.$request[0].'%')->get();
+
+        return json_encode(['searchedCatsData' => $searched_cats_data]);
+        dd($search_cats_data);
+    }
+
+    //猫削除
+    public function delete($cat_id){
+        $cat_data = Cat::find($cat_id);
+        $pathdel = public_path().'/storage/catImages/'.$cat_data->image;
+        \File::delete($pathdel);
+
+        $cat_data->delete();
+
+        return json_encode(['delete' => '削除成功しました！']);
+    }
 
     protected function validator(array $data)
     {

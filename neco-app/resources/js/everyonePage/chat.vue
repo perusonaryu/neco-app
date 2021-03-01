@@ -8,12 +8,14 @@
             <p class="message">
               {{ messageData.message }}
             </p>
+            <p class="datetime">{{ messageData.created_at | datetime }}</p>
           </div>
           <div v-else class="receive-message">
-            <h5>{{ chatUserData.name }}</h5>
+            <p class="chat-user-name">{{ chatUserData.name }}</p>
             <p class="message">
               {{ messageData.message }}
             </p>
+            <p class="datetime">{{ messageData.created_at | datetime }}</p>
           </div>
         </div>
       </div>
@@ -25,6 +27,7 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   data: () => ({
     message: '',
@@ -39,19 +42,23 @@ export default {
     },
   },
   mounted() {
-    this.$store.dispatch('auth/fetchUser');
-    this.chatUserGet(this.$route.params.chatUserId);
-    this.$store.subscribe(mutations => {
-      if (mutations.type === 'auth/setUser') {
-        this.messageDataGet(this.user.id, this.$route.params.chatUserId);
-        this.messageReceive();
-      }
-    });
-  },
-  created() {
     if (this.user) {
-      this.messageReceive();
+      this.messageDataGet(this.user.id, this.$route.params.chatUserId);
+    } else {
+      this.$store.dispatch('auth/fetchUser');
     }
+    this.chatUserGet(this.$route.params.chatUserId);
+  },
+  watch: {
+    user: function(userData, undefind) {
+      this.messageDataGet(userData.id, this.$route.params.chatUserId);
+      this.messageReceive();
+    },
+  },
+  filters: {
+    datetime: function(date) {
+      return moment(date).format('YYYY/MM/DD HH:mm');
+    },
   },
   methods: {
     send() {
@@ -96,9 +103,13 @@ export default {
 </script>
 
 <style scoped>
+p {
+  margin: 0;
+}
+
 .chat {
   max-width: 500px;
-  margin: 0 auto;
+  margin: 100px auto 0;
 }
 
 .message {
@@ -112,5 +123,15 @@ export default {
 
 .send-message {
   text-align: right;
+}
+
+.receive-message,
+.send-message {
+  margin-bottom: 10px;
+}
+
+.chat-user-name,
+.datetime {
+  font-size: 10px;
 }
 </style>

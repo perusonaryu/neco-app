@@ -1,11 +1,16 @@
 <template>
-  <v-container>
-    <ul>
-      <li v-for="chat in chatList" :key="chat.id">
-        <chat-list v-if="user.id != chat.user_id_1" :chatId="chat.user_id_1"></chat-list>
-        <chat-list v-else-if="user.id != chat.user_id_2" :chatId="chat.user_id_2"></chat-list>
-      </li>
-    </ul>
+  <v-container class="chat-user-list">
+    <v-card class="mx-auto" max-width="500" tile>
+      <v-list>
+        <v-subheader>トークリスト</v-subheader>
+        <v-list-item-group color="primary">
+          <v-list-item v-for="(chat,i) in chatList" :key="i">
+            <chat-list v-if="user.id != chat.user_id_1" :userId="user.id" :chatUserId="chat.user_id_1"></chat-list>
+            <chat-list v-else-if="user.id != chat.user_id_2" :userId="user.id" :chatUserId="chat.user_id_2"></chat-list>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
   </v-container>
 </template>
 
@@ -42,4 +47,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.chat-user-list {
+  margin-top: 100px;
+}
+</style>

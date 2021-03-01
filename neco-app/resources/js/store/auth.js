@@ -80,9 +80,10 @@ const actions = {
     },
 
     userUpdate(context,data){
-        axios.put('/api/user/update',data ,{
+        axios.post('/api/user/update',data ,{
             headers: {
                 Authorization: `Bearer ${state.token}`,
+                'X-HTTP-Method-Override': 'PUT',
             }
         }).then((result) => {
             context.commit('setUser',result.data.user);

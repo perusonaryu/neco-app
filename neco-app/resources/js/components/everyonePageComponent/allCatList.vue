@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-row justify="center" v-if="AllCatData">
-      <v-col cols="12" md="4" lg="6" v-for="catData in AllCatData" :key="catData.name">
+    <v-row justify="center"  v-if="AllCatData">
+      <v-col cols="12" md="6" lg="6" v-for="catData in AllCatData" :key="catData.name">
         <v-card class="mx-auto" width="100%" outlined>
           <v-list-item three-line>
             <router-link

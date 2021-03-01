@@ -18,7 +18,9 @@ export default {
   computed: {},
   watch: {
     userId: function(userId, undefind) {
-      this.likeCheck(userId, this.catId);
+      if(this.userId){
+        this.likeCheck(userId, this.catId);
+      }
     },
   },
   mounted() {

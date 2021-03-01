@@ -8,14 +8,17 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-// import router from './router';
+
 import Vuetify from 'vuetify';
+import * as VeeValidate from 'vee-validate';
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/dist/vuetify.min.css';
 import router from './router'
 import store from './store/index'
 import prefectureData from './prefectureData.json'
+
 Vue.use(Vuetify);
+Vue.use(VeeValidate);
 
 
 /**
@@ -31,9 +34,14 @@ Vue.use(Vuetify);
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('my-cats-list', require('./components/myPageComponent/myCatsList.vue').default);
+Vue.component('header-component', require('./components/everyonePageComponent/headerComponent.vue').default);
 Vue.component('all-cat-list', require('./components/everyonePageComponent/allCatList.vue').default);
 Vue.component('like-check', require('./components/everyonePageComponent/likeCheck.vue').default);
 Vue.component('chat-list', require('./components/everyonePageComponent/chatListComponent.vue').default);
+
+
+// Vue.component('ValidationProvider', ValidationProvider);
+// Vue.component('ValidationObserver', ValidationObserver);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -51,4 +59,5 @@ const app = new Vue({
     router,
     store,
     prefectureData,
+    VeeValidate,
 });

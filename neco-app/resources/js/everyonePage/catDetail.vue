@@ -58,7 +58,7 @@ export default {
     this.catDatailGet();
   },
   watch: {
-    catDetail: function(catDetai, undefind) {
+    catDetail: function(catDetail, undefind) {
       this.catPostedUserDataGet();
     },
   },
