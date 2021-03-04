@@ -37,7 +37,7 @@ class LoginController extends Controller
         }
 
         // tokenの作成
-        $token = $user->createToken($request->device_name ?? 'undefined')->plainTextToken;
+        $token = $user->createToken('token')->plainTextToken;
         // dd($token);
         return response()->json(['token' => $token, 'user' => $user], 200);
     }
@@ -54,7 +54,7 @@ class LoginController extends Controller
     {
         // オーバーライドして、デバイス名を必須化しています
         $request->validate([
-            $this->username() => 'required|string',
+            'email' => 'required|string',
             'password' => 'required|string',
         ]);
     }
@@ -72,6 +72,12 @@ class LoginController extends Controller
 
         // tokenの削除
         $user->tokens()->delete();
+
+        // このユーザーの現在のトークンを取り消す
+        // $user->currentAccessToken()->delete();
+
+        // $user->tokens()->where('id', $user->currentAccessToken()->id)->delete();
+        // $user->tokens()->where('id', $user->$id)->delete();
 
         return response()->json(['message' => 'logouted']);
     }

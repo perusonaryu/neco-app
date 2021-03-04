@@ -20,20 +20,25 @@ Broadcast::routes(['middleware' => ['auth:sanctum']]);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function (Request $request) {
         return response()->json(['user' => $request->user()]);
-    });
+    })->name('api.user');
     Route::post('logout', 'Auth\Api\LoginController@logout')->name('api.logout');
     Route::put('/user/update','UserController@update')->name('user.update');
 
-    //猫情報登録
-    Route::post('cat/register','CatController@register');
-    Route::get('cat/mydata/{id}','CatController@catslistget');
-    Route::get('cat/edit/{id}','CatController@edit');
-    Route::put('cat/update','CatController@update');
-    Route::delete('cat/delete/{cat_id}','CatController@delete');
+    
 });
-
 Route::post('register', 'Auth\Api\RegisterController@register')->name('api.register');
 Route::post('login', 'Auth\Api\LoginController@login')->name('api.login');
+
+//猫情報登録
+Route::post('cat/register','CatController@register')->name('cat.register');
+Route::get('cat/mydata/{id}','CatController@catslistget')->name('cat.get');
+Route::get('cat/edit/{id}','CatController@edit')->name('cat.edit');
+Route::put('cat/update','CatController@update')->name('cat.update');
+Route::delete('cat/delete/{cat_id}','CatController@delete')->name('cat.delete');
+
+
+
+
 
 //猫掲載者の情報を取得
 Route::get('posted/user/detail/{id}','UserController@detail');

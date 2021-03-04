@@ -26,6 +26,8 @@ class CatController extends Controller
                 'image' => $file_name,
                 'user_id' => $request->userId,
             ]);
+
+            return json_encode(['success' => '猫を登録しました!']);
         }
     }
 
